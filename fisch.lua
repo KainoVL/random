@@ -37,15 +37,104 @@ local teleportLocations = {
     ["The Arch"] = Vector3.new(997, 131, -1234)
 }
 
+teleportLocations["Crafting Table"] = Vector3.new(-3161, -745, 1674)
+
+local rodLocations = {
+    ["Carbon/Training"] = Vector3.new(450, 151, 226),
+    ["Plastic/Fast"] = Vector3.new(450, 151, 226),
+    ["Lucky"] = Vector3.new(450, 151, 226),
+    ["Stone"] = Vector3.new(5502, 146, -317),
+    ["Long"] = Vector3.new(483, 174, 148),
+    ["Magma [Give Orc Pufferfish]"] = Vector3.new(-1850, 165, 160),
+    ["Fungal [Give Agaric Alligator]"] = Vector3.new(2600, 130, -730),
+    ["Steady/Fortune/Rapid"] = Vector3.new(-1513, 142, 764),
+    ["Magnet"] = Vector3.new(-198, 133, 1930),
+    ["Nocturnal"] = Vector3.new(-144, -515, 1143),
+    ["Reinforced"] = Vector3.new(-989, -245, -2695),
+    ["Phoenix"] = Vector3.new(5967, 270, 851),
+    ["Scurvy"] = Vector3.new(-2827, 215, 1513),
+    ["Aurora [Needs Borealis]"] = Vector3.new(-144, -515, 1132),
+    ["King's"] = Vector3.new(1378, -808, -301),
+    ["Destiny [Need's 70% Bestiary]"] = Vector3.new(983, 131, -1233)
+}
+
+local fragmentLocations = {
+    ["Earth"] = Vector3.new(5970, 274, 846),
+    ["Deep Sea"] = Vector3.new(5843, 79, 383),
+    ["Solar [Needs Eclipse]"] = Vector3.new(6073, 443, 684),
+    ["Ancient [Fish For it]"] = Vector3.new(5793, 135, 403)
+}
+
+local totemLocations = {
+    ["Aurora"] = Vector3.new(-1811, -137, -3281),
+    ["Sundial"] = Vector3.new(-1149, 137, -1077),
+    ["Tempest"] = Vector3.new(36, 135, 1946),
+    ["Smokescreen"] = Vector3.new(2792, 140, -629),
+    ["Windset"] = Vector3.new(2792, 140, -629),
+    ["Eclipse"] = Vector3.new(5968, 274, 839),
+    ["Meteor"] = Vector3.new(-1945, 277, 231)
+}
+
 local locationNames = {}
 for name, _ in pairs(teleportLocations) do
     table.insert(locationNames, name)
 end
 table.sort(locationNames)
 
+local rodNames = {}
+for name, _ in pairs(rodLocations) do
+    table.insert(rodNames, name)
+end
+table.sort(rodNames)
+
+local fragmentNames = {}
+for name, _ in pairs(fragmentLocations) do
+    table.insert(fragmentNames, name)
+end
+table.sort(fragmentNames)
+
+local totemNames = {}
+for name, _ in pairs(totemLocations) do
+    table.insert(totemNames, name)
+end
+table.sort(totemNames)
+
 ui:CreateDropdown(teleportsTab, "Locations", "Select location to teleport", locationNames, locationNames[1], function(selected)
     if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
         local location = teleportLocations[selected]
+        if location then
+            LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(location)
+        end
+    end
+end)
+
+ui:CreateButton(teleportsTab, "Crafting Table", "Teleport to Crafting Table", function()
+    if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3161, -745, 1674)
+    end
+end)
+
+ui:CreateDropdown(teleportsTab, "Rods", "Select rod location to teleport", rodNames, rodNames[1], function(selected)
+    if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        local location = rodLocations[selected]
+        if location then
+            LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(location)
+        end
+    end
+end)
+
+ui:CreateDropdown(teleportsTab, "Fragments", "Select fragment location to teleport", fragmentNames, fragmentNames[1], function(selected)
+    if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        local location = fragmentLocations[selected]
+        if location then
+            LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(location)
+        end
+    end
+end)
+
+ui:CreateDropdown(teleportsTab, "Totems", "Select totem location to teleport", totemNames, totemNames[1], function(selected)
+    if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        local location = totemLocations[selected]
         if location then
             LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(location)
         end
