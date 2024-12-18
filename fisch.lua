@@ -163,7 +163,7 @@ ui:CreateToggle(mainTab, "Auto Shake", "Automatically shakes once rod is cast", 
                                     end
                                 end)
                                 
-                                wait(0.1)
+                                wait()
                                 local VirtualInputManager = game:GetService("VirtualInputManager")
                                 local viewportSize = workspace.CurrentCamera.ViewportSize
                                 local centerX, centerY = viewportSize.X / 2, viewportSize.Y / 2
@@ -184,7 +184,7 @@ ui:CreateToggle(mainTab, "Auto Shake", "Automatically shakes once rod is cast", 
                                     end
                                 end)
                                 
-                                wait(0)
+                                wait()
                                 local VirtualInputManager = game:GetService("VirtualInputManager")
                                 local viewportSize = workspace.CurrentCamera.ViewportSize
                                 local centerX, centerY = viewportSize.X / 2, viewportSize.Y / 2
@@ -261,6 +261,26 @@ ui:CreateToggle(mainTab, "Auto Cast", "Automatically casts fishing rod", false, 
                 end
             end
         end)
+    end
+end)
+
+local freezeEnabled = false
+local freezeCFrame = nil
+
+ui:CreateToggle(mainTab, "Freeze Character", "Freezes character in their current position", false, function(state)
+    freezeEnabled = state
+    if state then
+        if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+            freezeCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
+            
+            task.spawn(function()
+                while freezeEnabled and task.wait() do
+                    if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                        LocalPlayer.Character.HumanoidRootPart.CFrame = freezeCFrame
+                    end
+                end
+            end)
+        end
     end
 end)
 
