@@ -277,7 +277,7 @@ ui:CreateButton(mainTab, "Sell All Fish", "Automatically sells all fish and retu
             :WaitForChild("merchant"):WaitForChild("sellall"):InvokeServer()
         
         local startTime = tick()
-        while tick() - startTime < 60 do  
+        while tick() - startTime < 150 do  
             if LocalPlayer.leaderstats["C$"].Value > originalMoney then
                 break
             end
