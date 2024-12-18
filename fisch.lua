@@ -55,7 +55,7 @@ local autoShakeEnabled = false
 local autoReelEnabled = false
 local autoCastEnabled = false
 
-ui:CreateToggle(mainTab, "Auto Shake", "Automatically shakes when fish bites", false, function(state)
+ui:CreateToggle(mainTab, "Auto Shake", "Automatically shakes once rod is cast", false, function(state)
     autoShakeEnabled = state
     if state then
         table.insert(Connections, PlayerGui.DescendantAdded:Connect(function(object)
@@ -174,7 +174,6 @@ ui:CreateToggle(mainTab, "Auto Cast", "Automatically casts fishing rod", false, 
     end
 end)
 
-task.wait(0.1)
 ui:CreateButton(mainTab, "Sell All Fish", "Automatically sells all fish and returns when completed", function()
     if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
         local originalPosition = LocalPlayer.Character.HumanoidRootPart.Position
@@ -188,7 +187,7 @@ ui:CreateButton(mainTab, "Sell All Fish", "Automatically sells all fish and retu
             :WaitForChild("merchant"):WaitForChild("sellall"):InvokeServer()
         
         local startTime = tick()
-        while tick() - startTime < 60 do 
+        while tick() - startTime < 60 do  
             if LocalPlayer.leaderstats["C$"].Value > originalMoney then
                 break
             end
@@ -200,6 +199,7 @@ ui:CreateButton(mainTab, "Sell All Fish", "Automatically sells all fish and retu
 end)
 
 task.wait(0.1)
+
 local selectedAmount = 1
 
 ui:CreateSlider(miscTab, "Purchase Amount", "Select amount to purchase", 1, 100, 1, function(value)
@@ -233,6 +233,32 @@ end)
 
 ui:CreateButton(miscTab, "Buy Luck", "Purchases selected amount of luck", function()
     teleportAndBuy("luck")
+end)
+
+ui:CreateButton(miscTab, "Infinite Oxygen", "Removes oxygen bar", function()
+    if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("client") then
+        if LocalPlayer.Character.client:FindFirstChild("oxygen") then
+            LocalPlayer.Character.client.oxygen:Destroy()
+        end
+    end
+end)
+
+local walkspeedEnabled = false
+local defaultWalkSpeed = 16
+local selectedWalkspeed = defaultWalkSpeed
+
+ui:CreateSlider(miscTab, "Walkspeed", "Adjust walking speed", 16, 100, defaultWalkSpeed, function(value)
+    selectedWalkspeed = value
+    if walkspeedEnabled and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
+        LocalPlayer.Character.Humanoid.WalkSpeed = selectedWalkspeed
+    end
+end)
+
+ui:CreateToggle(miscTab, "Enable Walkspeed", "Toggle custom walkspeed", false, function(state)
+    walkspeedEnabled = state
+    if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
+        LocalPlayer.Character.Humanoid.WalkSpeed = state and selectedWalkspeed or defaultWalkSpeed
+    end
 end)
 
 local fullbrightEnabled = false
