@@ -4,7 +4,6 @@ local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 local GuiService = game:GetService("GuiService")
 local Lighting = game:GetService("Lighting")
 local Connections = {}
-local Injected = true
 
 local HyperionUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/KainoVL/meow/refs/heads/main/uilibrary.lua"))()
 local ui = HyperionUI.new("Fishing")
@@ -397,29 +396,3 @@ game:GetService("UserInputService").InputBegan:Connect(function(input)
         ui:Toggle()
     end
 end)
-
-if _G.Uninject then
-    _G.Uninject()
-end
-
-_G.Uninject = function()
-    autoShakeEnabled = false
-    autoReelEnabled = false
-    autoCastEnabled = false
-    
-    for _, v in ipairs(Connections) do
-        v:Disconnect()
-    end
-    table.clear(Connections)
-    Injected = false
-    if ui then
-        ui:Toggle()
-    end
-    
-    if fullbrightEnabled then
-        Lighting.Ambient = originalAmbient
-        Lighting.OutdoorAmbient = originalOutdoorAmbient
-        Lighting.Brightness = originalBrightness
-        Lighting.ExposureCompensation = originalExposure
-    end
-end
