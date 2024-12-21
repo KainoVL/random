@@ -73,7 +73,8 @@ local totemLocations = {
     ["Windset"] = Vector3.new(2792, 140, -629),
     ["Eclipse"] = Vector3.new(5968, 274, 839),
     ["Meteor"] = Vector3.new(-1945, 277, 231),
-    ["Blizzard"] = Vector3.new(20146, 743, 5805)
+    ["Blizzard"] = Vector3.new(20146, 743, 5805),
+    ["Avalanche"] = Vector3.new(19711, 468, 6057)
 }
 
 local locationNames = {}
