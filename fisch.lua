@@ -18,6 +18,7 @@ local teleportLocations = {
     ["Keeper's Altar"] = Vector3.new(1310, -802, -91),
     ["Sunstone Island"] = Vector3.new(-1038, 212, -1066),
     ["The Depths"] = Vector3.new(939, -715, 1267),
+    ["Northern Sumit"] = Vector3.new(19570, 133, 5298),
     ["Ancient Isles"] = Vector3.new(6054, 195, 295),
     ["Forsaken Shores"] = Vector3.new(-2584, 149, 1644),
     ["Trident Pedestals"] = Vector3.new(-1479, -225, -2341),
