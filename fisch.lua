@@ -71,7 +71,8 @@ local totemLocations = {
     ["Smokescreen"] = Vector3.new(2792, 140, -629),
     ["Windset"] = Vector3.new(2792, 140, -629),
     ["Eclipse"] = Vector3.new(5968, 274, 839),
-    ["Meteor"] = Vector3.new(-1945, 277, 231)
+    ["Meteor"] = Vector3.new(-1945, 277, 231),
+    ["Blizzard"] = Vector3.new(20146, 743, 5805)
 }
 
 local locationNames = {}
